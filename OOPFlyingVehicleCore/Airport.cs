@@ -16,9 +16,16 @@ namespace OOPFlyingVehicle
 
         public Airport(string Code) : this(Code, defaultMaxVehicles)
         {
-            //Default to 5 vehicles   
-        }
+            //Default to 5 vehicles
+            MaxVehicles= defaultMaxVehicles;
+            AirportCode = Code;
 
+            if (Code == "JFK")
+            {
+                MaxVehicles = 10;
+            }
+        }
+        
         public Airport(string Code, int MaxVehicles)
         {
             
@@ -37,12 +44,12 @@ namespace OOPFlyingVehicle
                 }
                 return string.Format("{0} lands at {1}", a, this.AirportCode);
             }
-            return string.Format("{0} is full can't land here",this.AirportCode);
+            return string.Format("{0} is full can't land here", this.AirportCode);
         }
 
         public string TakeOff(AerialVehicle a)
         {
-            
+
             return a.TakeOff() + " from " + this.AirportCode;
         }
 
@@ -53,7 +60,7 @@ namespace OOPFlyingVehicle
             {
                 allTakeOff += this.TakeOff(this.Vehicles[i]);
             }
-            
+
             return allTakeOff;
 
         }
@@ -61,9 +68,9 @@ namespace OOPFlyingVehicle
         public string Land(List<AerialVehicle> landing)
         {
             string stringLand = string.Empty;
-            foreach(AerialVehicle av in landing)
+            foreach (AerialVehicle av in landing)
             {
-                stringLand += this.Land(av);   
+                stringLand += this.Land(av);
             }
 
             return stringLand;

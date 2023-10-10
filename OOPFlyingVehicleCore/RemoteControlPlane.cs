@@ -1,18 +1,13 @@
-﻿using OOPFlyingVehicleCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace OOPFlyingVehicle
+namespace OOPFlyingVehicleCore
 {
-    public class Drone : AerialVehicle, IHasBatteries
+    internal class RemoteControlPlane : IHasBatteries
     {
-        public Drone()
-        {
-            this.MaxAltitude = 500;
-        }
-
         public bool HasBatteries { get; set; }
         public bool IsCharged { get; set; }
         public int ChargeLeft { get; set; }

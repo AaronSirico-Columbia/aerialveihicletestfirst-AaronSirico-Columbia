@@ -11,17 +11,17 @@ namespace OOPFlyingVehicle
 
         public Engine()
         {
-            
+           
         }
 
         public virtual void Start()
         {
-            
+            IsStarted = true;
         }
 
         public virtual void Stop()
         {
-            
+            IsStarted = false;
         }
 
         public virtual string About()

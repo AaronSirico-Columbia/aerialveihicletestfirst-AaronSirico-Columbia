@@ -7,61 +7,60 @@ namespace OOPFlyingVehicle
 {
     public class ToyPlane : Airplane
     {
-        bool isWoundUP
-        {
-            get;
-            
-        }
+        public bool isWoundUp { get; set; }
+
 
         public ToyPlane()
         {
+            isWoundUp = false;
             this.MaxAltitude = 50;
-            this.Engine = new ToyEngine();
         }
 
-        public override void StartEngine()
+        public string About()
         {
-            throw new NotImplementedException();
+            return "ToyPlane's engine will not start unless it is woundup. ToyPlanes MaxAltitude is 50 ft";
         }
 
-        public override string TakeOff()
+        public string getWindUpString()
         {
-            throw new NotImplementedException();
+            if (Engine.IsStarted == true)
+                return "have string";
+            else
+                return "do not have string";
         }
 
         public void WindUp()
         {
-            while (((ToyEngine)Engine).IsFullyWound == false)
-            {
-                this.Wind();
-            }
+            getEngineStartedString();
         }
 
-        public void Wind()
+        public void StartEngine()
         {
-            ((ToyEngine)Engine).Wind();
+            Engine.IsStarted = true;
+        }
+
+        public string TakeOff()
+        {
+            if (Engine.IsStarted == true)
+                return "OOPFlyingVehicle.Airplane is flying";
+            else
+                return "OOPFlyingVehicle.Airplane can't fly it's engine is not started.";
         }
 
         public void UnWind()
         {
-            throw new NotImplementedException();
+            Engine.IsStarted = false;
         }
 
         public void UnWindCompletely()
         {
-            throw new NotImplementedException();
+            Engine.IsStarted = false;
         }
 
-        protected string getWindUpString()
+        public void Wind()
         {
-            string woundUp = "It's not wound up.";
-            if(isWoundUP) woundUp = woundUp.Replace("not ", "");
-            return woundUp;
+            Engine.IsStarted = true;
         }
 
-        public override string About()
-        {
-            return base.About() + "\n" + this.getWindUpString();
-        }
     }
 }

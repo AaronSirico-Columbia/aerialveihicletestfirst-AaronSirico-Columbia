@@ -55,7 +55,7 @@ namespace OOPFlyingVehicle
                 //Fly up
                 WriteLine("\nFly up Tests...................................................................");
                 WriteLine("Call ap.FlyUp() fly to 1,000ft default");
-                ap.FlyUp();    //Fly up tp 1,000 ft
+                ap.FlyUp(0);    //Fly up tp 1,000 ft
                 WriteLine(ap.About());
                 WriteLine("\nCall ap.FlyUp(44000) Fly up to 45,000ft:");
                 ap.FlyUp(44000);    //Fly up tp 45,000 ft shouldn't work
