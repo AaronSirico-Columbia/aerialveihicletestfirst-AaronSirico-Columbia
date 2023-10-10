@@ -36,7 +36,7 @@ namespace UnitTestFlyingVehicle
         {
             //Arrange
             Airport apORD = new Airport("ORD");
-            Airplane plane = new Airplane();
+            Airplane plane = new Airplane(new Engine());
             int orginalCount;
             //Act
             orginalCount = apORD.Vehicles.Count;
@@ -50,7 +50,7 @@ namespace UnitTestFlyingVehicle
         {
             //Arrange
             Airport apORD = new Airport("ORD");
-            Airplane plane = new Airplane();
+            Airplane plane = new Airplane(new Engine());
             int MaxVehicles;
             AerialVehicle[] planes;
             int orginalCount;
@@ -60,7 +60,7 @@ namespace UnitTestFlyingVehicle
             planes = new AerialVehicle[MaxVehicles];
             for (int i = 0; i < MaxVehicles; i++)
             {
-                planes[i] = new Airplane();
+                planes[i] = new Airplane(new Engine());
             }
             apORD.Land(planes.ToList());
             //Assert
@@ -72,7 +72,7 @@ namespace UnitTestFlyingVehicle
         {
             //Arrange
             Airport apORD = new Airport("ORD");
-            Airplane plane = new Airplane();
+            Airplane plane = new Airplane(new Engine());
             int MaxVehicles;
             AerialVehicle[] planes;
             int orginalCount;
@@ -82,7 +82,7 @@ namespace UnitTestFlyingVehicle
             planes = new AerialVehicle[MaxVehicles];
             for (int i = 0; i < MaxVehicles; i++)
             {
-                planes[i] = new Airplane();
+                planes[i] = new Airplane(new Engine());
             }
             apORD.Land(planes.ToList());
             //Assert
@@ -101,7 +101,7 @@ namespace UnitTestFlyingVehicle
             planes = new AerialVehicle[MaxVehicles];
             for (int i = 0; i < MaxVehicles; i++)
             {
-                planes[i] = new Airplane();
+                planes[i] = new Airplane(new Engine());
             }
 
             apORD.Land(planes.ToList());

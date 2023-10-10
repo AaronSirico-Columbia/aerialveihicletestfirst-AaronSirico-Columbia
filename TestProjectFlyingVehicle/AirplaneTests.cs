@@ -27,7 +27,7 @@ namespace UnitTestFlyingVehicle
 
         public AirplaneTests()
         {
-            Airplane = new Airplane();
+            Airplane = new Airplane(new Engine());
         }
 
         [TestMethod]
@@ -163,7 +163,7 @@ namespace UnitTestFlyingVehicle
             //Assert
             Assert.AreEqual(defaultHeight, 0);
             Assert.AreEqual(FlyDown, 0);
-            //Assert.AreEqual(FlyDownOneAlreadyZero, 0);
+            Assert.AreEqual(FlyDownOneAlreadyZero, 0);
             Assert.AreEqual(FlyDownOneAtTwo, 1);
 
 

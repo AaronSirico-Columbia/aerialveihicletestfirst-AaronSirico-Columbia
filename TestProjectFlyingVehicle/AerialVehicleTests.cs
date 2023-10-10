@@ -20,7 +20,7 @@ namespace UnitTestFlyingVehicle
         public void AerialVehicleEngineTests()
         {
             //Arrange
-            Airplane ap = new Airplane();
+            Airplane ap = new Airplane(new Engine());
             //Act 
             bool defaultEngine = ap.Engine.IsStarted;  //default should be off
             ap.StartEngine();

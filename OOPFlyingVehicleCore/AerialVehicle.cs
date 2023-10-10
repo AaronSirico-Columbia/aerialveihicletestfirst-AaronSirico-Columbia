@@ -1,79 +1,120 @@
-﻿using System;
+﻿using OOPFlyingVehicleCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace OOPFlyingVehicle
 {
-    public class AerialVehicle
+    public abstract class AerialVehicle : Engine, IFlyable
     {
-        public Engine Engine { get; protected set; }
-        public bool IsFlying { get; protected set; }
-        public int MaxAltitude { get; protected set; }
-        public int CurrentAltitude { get; protected set; }
+        
+        public bool IsFlying { get; set; }
 
-        public AerialVehicle()
-        {
-            this.Engine = new Engine();
-        }
+        public int MaxAltitude { get; set; }
 
-        public virtual void StartEngine()
-        {
-            throw new NotImplementedException();
-        }
+        protected int currentAltitude;
+        protected IEngine engine;
 
-        public virtual void StopEngine()
-        {
-            throw new NotImplementedException();
-        }
+        public int CurrentAltitude { get => currentAltitude; set => currentAltitude = value; }
+        public IEngine Engine { get => engine; set => engine = value; }
 
-        public void FlyUp()
-        {
-            throw new NotImplementedException();
-        }
 
-        public void FlyUp(int HowManyFeet)
+        AerialVehicle ae;
+
+        public AerialVehicle(IEngine engine)
         {
-            //If HowMany feet is nagtive trow invaid operation exception
-            if (HowManyFeet < 0) throw new InvalidOperationException("Can't FlyUp a negative amount");
             
-            throw new NotImplementedException();
+            this.Engine = engine;
+            this.isStarted = false;
+            this.currentAltitude = 0;
+            this.IsFlying = false;
+            this.MaxAltitude = 41000;
+            
+
+        }
+
+        public string About()
+        {
+            return $"This {this.ToString()} has a max altitude of 41000 ft. \nIt's current altitude is 0 ft. \n{this.Engine.ToString()} is not started.";
+        }
+
+        public string TakeOff()
+        {
+            if (Engine.IsStarted == true)
+            {
+                CurrentAltitude = 41000;
+                return "OOPFlyingVehicle.Airplane is flying";
+            }
+            else
+                return "OOPFlyingVehicle.Airplane can't fly it's engine is not started.";
+
+        }
+
+        public void StartEngine()
+        {
+            if(Engine == null)
+            {
+                throw new ArgumentNullException(nameof(Engine));
+            }
+            IsStarted = true;
+            getEngineStartedString();
+            Engine.Start();
         }
 
         public void FlyDown()
         {
-            throw new NotImplementedException();
+            if (0 <= MaxAltitude)
+                CurrentAltitude = CurrentAltitude - 0;
+            else
+                CurrentAltitude = MaxAltitude;
         }
 
         public void FlyDown(int HowManyFeet)
         {
-            if (HowManyFeet < -1000) throw new InvalidOperationException("Some Exception Message");
-            throw new NotImplementedException();
-        }
-        public virtual string TakeOff()
-        {
-            if (Engine.IsStarted)
+            try
             {
-
-                return string.Empty;
+                if (HowManyFeet <= MaxAltitude)
+                    CurrentAltitude = CurrentAltitude - HowManyFeet;
+                else
+                    CurrentAltitude = MaxAltitude;
             }
-            return string.Empty;
+            catch (InvalidOperationException ex)
+            {
+                throw;
+            }
+            if (HowManyFeet < 0) throw new InvalidOperationException("Can't FlyDown a negative amount");
+            
+            
         }
 
-        /// <summary>
-        /// Returns a string that describes if an engine is started
-        /// </summary>
-        /// <returns></returns>
-        protected string getEngineStartedString()
+        public void FlyUp()
         {
-            return this.Engine.About();
+            CurrentAltitude = 1000;
+            if (CurrentAltitude >= 0)
+            {
+                IsFlying = true;
+            }
         }
 
-        public virtual string About()
+        public void FlyUp(int HowManyFeet)
         {
-            string about = string.Format("This {0} has a max altitude of {1} ft. \nIt's current altitude is {2} ft. \n{3}", 
-                this.ToString(), this.MaxAltitude.ToString(), this.CurrentAltitude, this.getEngineStartedString());
-            return about;
+            if (HowManyFeet <= 41000)
+                CurrentAltitude = HowManyFeet + CurrentAltitude;
+            else
+                CurrentAltitude = 1000;
+            //If HowMany feet is nagtive trow invaid operation exception
+            if (HowManyFeet < 0) throw new InvalidOperationException("Can't FlyUp a negative amount");
+
+       
+        }
+
+        public string getEngineStartedString()
+        {
+            if (Engine.IsStarted == true)
+                return "started";
+            else
+                return "not started";
         }
     }
 }
